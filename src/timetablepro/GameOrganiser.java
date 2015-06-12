@@ -57,6 +57,7 @@ public class GameOrganiser {
      * @param mode game modes listed in TimetablePro
      */
     public void startGame(int mode) {
+        
         if (inGame) {
             JOptionPane.showMessageDialog(null, 
                 "Sorry, you can't start a new game until the current game is finished.", 
@@ -72,7 +73,7 @@ public class GameOrganiser {
          * MODE_TEST        test a timetable
          */
         
-        
+        mainFrame.setPanelToGame();
         if (mode >= timetablepro.TimetablePro.MODE_TIMETABLE) {
             String userInput = JOptionPane.showInputDialog(
                 null,
@@ -113,6 +114,7 @@ public class GameOrganiser {
         } else if (mode <= timetablepro.TimetablePro.MODE_TIMED) {
             isFixedTimetable = false;
             allowBonusTime = true;
+            
         }
         score = 0;
         correctCount = new int[4];
@@ -158,7 +160,7 @@ public class GameOrganiser {
         
         leftNumPanel.num = newLeft;
         rightNumPanel.num = newRight;
-
+        //out.println(newLeft + "< >"+ newRight);
         mainFrame.repaint();
     }
     
@@ -200,6 +202,7 @@ public class GameOrganiser {
         boolean gotItRight = (answer == correctAns);
         feedbackPanel.showFeedback(gotItRight);
         if (gotItRight) {
+            setNewNumbers();
             score++;
             
             switch (currentOperator) {
@@ -213,7 +216,6 @@ public class GameOrganiser {
                 clockPanel.giveBonusTime();
             }
             
-            setNewNumbers();
         } else {
             // got it wrong
             if (inGame) {
@@ -258,26 +260,29 @@ public class GameOrganiser {
     }
     
 
-    public void gameOver(String message, boolean isForced) {
+    public void gameOver(String message, boolean isForced, boolean showTime) {
         if (! isForced) {
             double duration = (System.currentTimeMillis() - gameStartTime)/1000.0;
             
-            String resultAnalysis = String.format("You got %d correct in %.1f seconds.%n", score, duration);
+            String resultAnalysis = String.format("You got %d correct", score);
+            resultAnalysis += showTime ? String.format(" in %.2f seconds", duration) : "";
+            resultAnalysis += ".\n";
             if (correctCount[0] > 0) resultAnalysis += String.format("Addition: %d%n", correctCount[0]);
             if (correctCount[1] > 0) resultAnalysis += String.format("Subtraction: %d%n", correctCount[1]);
             if (correctCount[2] > 0) resultAnalysis += String.format("Multiplication: %d%n", correctCount[2]);
             if (correctCount[3] > 0) resultAnalysis += String.format("Division: %d%n", correctCount[3]);
             
-            JOptionPane.showMessageDialog(null, 
+            mainFrame.displayResult(message == null ? String.format("Times up!%n%s", resultAnalysis) : message);
+        /*    JOptionPane.showMessageDialog(null, 
                 message == null ? String.format("Times up!%n%s", resultAnalysis) : message,
                 "Game Over",
                 JOptionPane.INFORMATION_MESSAGE
-            );
+            ); //*/
         }
         testNumbersList.clear();
         clockPanel.resetClock();
         updateOperations();
-        inGame = isFixedTimetable = inTest = allowBonusTime =  false;
+        inGame = isFixedTimetable = inTest = allowBonusTime  =  false;
         settingsMenu.setEnabled(! inGame);
         mainFrame.repaint();
     }
@@ -285,7 +290,8 @@ public class GameOrganiser {
         long currentTime = System.currentTimeMillis();
         gameStartTime = currentTime - gameStartTime;
         gameOver(String.format("Well done!\nYou have completed the %d timetable in %.2f seconds.", chosenFixedValue, gameStartTime/1e3),
-                false
+                false,
+                true
                 );
     }
 

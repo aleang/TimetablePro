@@ -38,6 +38,8 @@ public class TimetablePro extends javax.swing.JFrame {
                 new JCheckBoxMenuItem[]{jCheckAdd, jCheckSubtract, jCheckMultiply, jCheckDivide},
                 jMenuSettings);
         backPanel.setBackground(GLOBAL_BG);
+        tabPaneGame.setBackground(GLOBAL_BG);
+        numberInput.requestFocus();
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = this.getSize();
         this.setLocation((d.width - frameSize.width) / 2, (d.height - frameSize.height) / 2);
@@ -51,14 +53,18 @@ public class TimetablePro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jColorChooser1 = new javax.swing.JColorChooser();
         backPanel = new javax.swing.JPanel();
-        jLabelOperation = new javax.swing.JLabel();
-        numberLeft = new timetablepro.NumberPanel();
-        numberRight = new timetablepro.NumberPanel();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        tabPaneGame = new javax.swing.JPanel();
         cp = new timetablepro.ClockPanel();
         fp = new timetablepro.FeedbackPanel();
-        jNumberFromUser = new timetablepro.JNumberField();
+        numberInput = new timetablepro.JNumberField();
+        numberRight = new timetablepro.NumberPanel();
+        jLabelOperation = new javax.swing.JLabel();
+        numberLeft = new timetablepro.NumberPanel();
+        tabPaneScore = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtaResult = new javax.swing.JTextArea();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuPlay = new javax.swing.JMenu();
         jMenuItemTimed = new javax.swing.JMenuItem();
@@ -81,31 +87,26 @@ public class TimetablePro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        backPanel.setBackground(new java.awt.Color(255, 244, 201));
+        backPanel.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabelOperation.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        jLabelOperation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelOperation.setText("x");
-        jLabelOperation.setMaximumSize(new java.awt.Dimension(58, 58));
-        jLabelOperation.setMinimumSize(new java.awt.Dimension(58, 58));
-        jLabelOperation.setPreferredSize(new java.awt.Dimension(58, 58));
+        jTabbedPane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
-        numberLeft.setPreferredSize(new java.awt.Dimension(100, 50));
+        tabPaneGame.setBackground(new java.awt.Color(204, 204, 204));
 
         cp.setMaximumSize(new java.awt.Dimension(200, 200));
         cp.setMinimumSize(new java.awt.Dimension(200, 200));
 
-        jNumberFromUser.setColumns(3);
-        jNumberFromUser.setFont(new java.awt.Font("Segoe UI Semibold", 0, 36)); // NOI18N
-        jNumberFromUser.setForeground(java.awt.Color.black);
-        jNumberFromUser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jNumberFromUser.setAutoscrolls(false);
-        jNumberFromUser.setBorder(null);
-        jNumberFromUser.setCaretColor(new java.awt.Color(0, 0, 204));
-        jNumberFromUser.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jNumberFromUser.addActionListener(new java.awt.event.ActionListener() {
+        numberInput.setColumns(3);
+        numberInput.setFont(new java.awt.Font("Segoe UI Semibold", 0, 36)); // NOI18N
+        numberInput.setForeground(java.awt.Color.black);
+        numberInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        numberInput.setAutoscrolls(false);
+        numberInput.setBorder(null);
+        numberInput.setCaretColor(new java.awt.Color(0, 0, 204));
+        numberInput.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        numberInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNumberFromUserActionPerformed(evt);
+                numberInputActionPerformed(evt);
             }
         });
 
@@ -115,14 +116,14 @@ public class TimetablePro extends javax.swing.JFrame {
             fpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fpLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jNumberFromUser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(numberInput, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         fpLayout.setVerticalGroup(
             fpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fpLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jNumberFromUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(numberInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -143,35 +144,78 @@ public class TimetablePro extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
+        jLabelOperation.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        jLabelOperation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelOperation.setText("x");
+        jLabelOperation.setMaximumSize(new java.awt.Dimension(58, 58));
+        jLabelOperation.setMinimumSize(new java.awt.Dimension(58, 58));
+        jLabelOperation.setPreferredSize(new java.awt.Dimension(58, 58));
+
+        numberLeft.setPreferredSize(new java.awt.Dimension(100, 50));
+
+        javax.swing.GroupLayout tabPaneGameLayout = new javax.swing.GroupLayout(tabPaneGame);
+        tabPaneGame.setLayout(tabPaneGameLayout);
+        tabPaneGameLayout.setHorizontalGroup(
+            tabPaneGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabPaneGameLayout.createSequentialGroup()
+                .addGroup(tabPaneGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabPaneGameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(numberLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabelOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(numberRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tabPaneGameLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        tabPaneGameLayout.setVerticalGroup(
+            tabPaneGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabPaneGameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tabPaneGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabPaneGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(numberRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(numberLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        jTabbedPane.addTab("Game", tabPaneGame);
+
+        jtaResult.setEditable(false);
+        jtaResult.setColumns(20);
+        jtaResult.setLineWrap(true);
+        jtaResult.setRows(5);
+        jtaResult.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jtaResult);
+
+        javax.swing.GroupLayout tabPaneScoreLayout = new javax.swing.GroupLayout(tabPaneScore);
+        tabPaneScore.setLayout(tabPaneScoreLayout);
+        tabPaneScoreLayout.setHorizontalGroup(
+            tabPaneScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+        );
+        tabPaneScoreLayout.setVerticalGroup(
+            tabPaneScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+        );
+
+        jTabbedPane.addTab("Score", tabPaneScore);
+
         javax.swing.GroupLayout backPanelLayout = new javax.swing.GroupLayout(backPanel);
         backPanel.setLayout(backPanelLayout);
         backPanelLayout.setHorizontalGroup(
             backPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(numberLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jLabelOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(numberRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         backPanelLayout.setVerticalGroup(
             backPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(backPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(numberRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numberLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelOperation, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jMenuPlay.setMnemonic('p');
@@ -341,11 +385,15 @@ public class TimetablePro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 3, Short.MAX_VALUE))
         );
 
         pack();
@@ -355,8 +403,8 @@ public class TimetablePro extends javax.swing.JFrame {
         gameOrganiser.startGame(MODE_TIMED);
     }//GEN-LAST:event_jMenuItemTimedActionPerformed
 
-    private void jNumberFromUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNumberFromUserActionPerformed
-        String submittedAnswer = jNumberFromUser.getText();
+    private void numberInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberInputActionPerformed
+        String submittedAnswer = numberInput.getText();
         try {
             int input = Integer.parseInt(submittedAnswer);
             gameOrganiser.checkAnswer(input);
@@ -364,7 +412,7 @@ public class TimetablePro extends javax.swing.JFrame {
             //e.printStackTrace();
         }
         highlightBox();
-    }//GEN-LAST:event_jNumberFromUserActionPerformed
+    }//GEN-LAST:event_numberInputActionPerformed
 
     private void jMenuItemPractiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPractiseActionPerformed
         gameOrganiser.startGame(MODE_TIMETABLE);
@@ -380,6 +428,7 @@ public class TimetablePro extends javax.swing.JFrame {
         Color tmp = JColorChooser.showDialog(null, "Please select the background colour.", GLOBAL_BG);
         GLOBAL_BG = tmp == null ? GLOBAL_BG : tmp;
         backPanel.setBackground(GLOBAL_BG);
+        tabPaneGame.setBackground(GLOBAL_BG);
         repaint();
     }//GEN-LAST:event_jMenuSetBgColourActionPerformed
 
@@ -443,7 +492,7 @@ public class TimetablePro extends javax.swing.JFrame {
     }//GEN-LAST:event_changedOperationsMouseRelease
 
     private void jMenuStopGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuStopGameActionPerformed
-        gameOrganiser.gameOver(null, true);
+        gameOrganiser.gameOver(null, true, false);
     }//GEN-LAST:event_jMenuStopGameActionPerformed
 
     private void jMenuTestDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTestDurationActionPerformed
@@ -473,7 +522,7 @@ public class TimetablePro extends javax.swing.JFrame {
     public void highlightBox() {
         //jNumberFromUser.setSelectionStart(0);
         //jNumberFromUser.setSelectionEnd(Integer.MAX_VALUE);
-        jNumberFromUser.setText("");
+        numberInput.setText("");
     }
     /**
      * @param args the command line arguments
@@ -484,13 +533,15 @@ public class TimetablePro extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        //try { javax.swing.UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
+	
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
-            }
+                } 
+            } //*/
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(TimetablePro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -524,7 +575,6 @@ public class TimetablePro extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckDivide;
     private javax.swing.JCheckBoxMenuItem jCheckMultiply;
     private javax.swing.JCheckBoxMenuItem jCheckSubtract;
-    private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabelOperation;
     private javax.swing.JMenu jMenuAbout;
     private javax.swing.JMenuBar jMenuBar;
@@ -540,10 +590,25 @@ public class TimetablePro extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuTest60Sec;
     private javax.swing.JMenuItem jMenuTestDuration;
     private javax.swing.JMenuItem jMenuTestTimetable;
-    private javax.swing.JTextField jNumberFromUser;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JTextArea jtaResult;
+    private javax.swing.JTextField numberInput;
     private timetablepro.NumberPanel numberLeft;
     private timetablepro.NumberPanel numberRight;
+    private javax.swing.JPanel tabPaneGame;
+    private javax.swing.JPanel tabPaneScore;
     // End of variables declaration//GEN-END:variables
+
+    void displayResult(String resultAnalysis) {
+        jTabbedPane.setSelectedIndex(1);
+        jtaResult.setText(resultAnalysis);
+    }
+
+    void setPanelToGame() {
+        jTabbedPane.setSelectedIndex(0);
+        
+    }
 
 
     

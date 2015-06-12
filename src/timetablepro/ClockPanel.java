@@ -71,7 +71,7 @@ public class ClockPanel extends javax.swing.JPanel implements ActionListener {
             
             if (sysCurrentTime > sysEnd && go.inGame) {
                 t.stop();
-                go.gameOver(null, false);
+                go.gameOver(null, false, false);
             }
         } else {
             // does the tick
@@ -84,7 +84,7 @@ public class ClockPanel extends javax.swing.JPanel implements ActionListener {
             if (currentTime <= 0 && go.inGame) {
                 t.stop();
                 if (go != null)
-                go.gameOver(null, false);
+                go.gameOver(null, false, true);
             }
         }
         tp.repaint();
